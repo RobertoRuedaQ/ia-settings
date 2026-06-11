@@ -1,0 +1,50 @@
+# ~/.claude — back up ONLY authored config.
+# Ignore everything by default, then allow-list what's safe to share.
+# Everything else (transcripts, caches, logs, machine state, and anything that
+# may contain secrets) stays local.
+/*
+
+# --- allow-listed config worth backing up ---
+!/.gitignore
+!/agents/
+!/skills/
+!/hooks/
+!/settings.json
+# Optional docs you authored — uncomment to include:
+# !/dhh-agent-slides-brief.md
+
+# --- re-ignore junk even inside allow-listed dirs ---
+**/.DS_Store
+
+# NEVER back these up (defense-in-depth; already covered by /* above):
+# secrets / account / local overrides
+.claude.json
+**/.claude.json.backup.*
+**/.credentials.json
+**/settings.local.json
+.env
+**/.env*
+*.key
+*.pem
+# logs / history / state
+bash-audit.log
+history.jsonl
+.last-cleanup
+.last-update-result.json
+*-cache.json
+remote-settings.json
+policy-limits.json
+# regenerable / machine-specific dirs
+backups/
+cache/
+paste-cache/
+shell-snapshots/
+file-history/
+projects/
+sessions/
+session-env/
+telemetry/
+plugins/
+debug/
+ide/
+.claude/

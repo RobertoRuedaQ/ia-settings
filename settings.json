@@ -1,0 +1,89 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(*)",
+      "WebFetch(*)"
+    ],
+    "deny": [
+      "Bash(rm -rf*)",
+      "Bash(rm -fr*)",
+      "Bash(git push --force*)",
+      "Bash(git push -f*)",
+      "Bash(git reset --hard*)",
+      "Bash(git checkout .*)",
+      "Bash(git clean -fd*)",
+      "Bash(git clean -df*)",
+      "Bash(*DROP TABLE*)",
+      "Bash(*DROP DATABASE*)",
+      "Edit(**/config/credentials*)",
+      "Edit(**/.env*)",
+      "Edit(**/db/schema.rb)",
+      "Edit(**/Gemfile)",
+      "Edit(**/config/application.rb)",
+      "Edit(**/config/initializers/**)",
+      "Write(**/config/credentials*)",
+      "Write(**/.env*)",
+      "Write(**/db/schema.rb)",
+      "Write(**/Gemfile)",
+      "Write(**/config/application.rb)",
+      "Write(**/config/initializers/**)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -r '\"[\\(now|todate)] \\(.tool_input.command)\"' >> ~/.claude/bash-audit.log 2>/dev/null || true"
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "printf '\\a'"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/hooks/token-cost-report.sh Tarea"
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/hooks/token-cost-report.sh Subagente"
+          }
+        ]
+      }
+    ]
+  },
+  "model": "opus[1m]",
+  "enabledPlugins": {
+    "modern-web-guidance@googlechrome": true
+  },
+  "extraKnownMarketplaces": {
+    "googlechrome": {
+      "source": {
+        "source": "github",
+        "repo": "GoogleChrome/modern-web-guidance"
+      }
+    }
+  },
+  "theme": "dark-ansi",
+  "skipWorkflowUsageWarning": true
+}
