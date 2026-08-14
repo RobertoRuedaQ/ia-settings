@@ -6,6 +6,7 @@
 
 # --- allow-listed config worth backing up ---
 !/.gitignore
+!/CLAUDE.md
 !/agents/
 !/skills/
 !/hooks/

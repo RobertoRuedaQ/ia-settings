@@ -70,11 +70,44 @@
           }
         ]
       }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "startup",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/hooks/plan-orientation.sh"
+          }
+        ]
+      },
+      {
+        "matcher": "resume",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/hooks/plan-orientation.sh"
+          }
+        ]
+      },
+      {
+        "matcher": "compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/hooks/plan-orientation.sh"
+          }
+        ]
+      }
     ]
   },
-  "model": "opus[1m]",
+  "statusLine": {
+    "type": "command",
+    "command": "bash ~/.claude/hooks/plan-statusline.sh"
+  },
   "enabledPlugins": {
-    "modern-web-guidance@googlechrome": true
+    "modern-web-guidance@googlechrome": true,
+    "frontend-design@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "googlechrome": {
@@ -84,6 +117,7 @@
       }
     }
   },
+  "skipWorkflowUsageWarning": true,
   "theme": "dark-ansi",
-  "skipWorkflowUsageWarning": true
+  "skipDangerousModePermissionPrompt": true
 }
