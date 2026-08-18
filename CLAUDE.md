@@ -62,6 +62,18 @@ memory at all. On a genuine conflict between what a memory says and what
 the code does, the code wins, unless the memory records a product/business
 decision the code can't express on its own.
 
+## A project's own documentation/learnings conventions are part of done
+
+Some projects define their own documentation structure beyond this file —
+e.g. a dual set of docs (one for the engineering team, one written in plain
+language for non-technical stakeholders) kept next to the code, or a
+project-local learnings log that captures gotchas and confirmed decisions as
+they happen. When a project defines either of these, treat updating them as
+part of a task's definition of done — the same task that changes the
+behavior updates the doc/log that describes it, not a follow-up step that
+may or may not happen later. Check the project's own `CLAUDE.md` (if it has
+one) for the specifics of what it expects and where.
+
 ## Long docs get a compact sibling
 
 Any doc that grows past ~100 lines and gets read for context on a regular
