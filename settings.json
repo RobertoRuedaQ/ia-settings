@@ -1,7 +1,6 @@
 {
   "permissions": {
     "allow": [
-      "Bash(*)",
       "WebFetch(*)"
     ],
     "deny": [
@@ -26,7 +25,13 @@
       "Write(**/db/schema.rb)",
       "Write(**/Gemfile)",
       "Write(**/config/application.rb)",
-      "Write(**/config/initializers/**)"
+      "Write(**/config/initializers/**)",
+      "Edit(**/.aws/credentials*)",
+      "Write(**/.aws/credentials*)",
+      "Edit(**/*.tfstate)",
+      "Write(**/*.tfstate)",
+      "Edit(**/cdk.out/**)",
+      "Write(**/cdk.out/**)"
     ]
   },
   "hooks": {
@@ -57,6 +62,10 @@
           {
             "type": "command",
             "command": "bash ~/.claude/hooks/token-cost-report.sh Tarea"
+          },
+          {
+            "type": "command",
+            "command": "bash ~/.claude/hooks/learnings-capture.sh Tarea"
           }
         ]
       }
@@ -67,6 +76,10 @@
           {
             "type": "command",
             "command": "bash ~/.claude/hooks/token-cost-report.sh Subagente"
+          },
+          {
+            "type": "command",
+            "command": "bash ~/.claude/hooks/learnings-capture.sh Subagente"
           }
         ]
       }
@@ -117,7 +130,40 @@
       }
     }
   },
+  "skipDangerousModePermissionPrompt": true,
   "skipWorkflowUsageWarning": true,
   "theme": "dark-ansi",
-  "skipDangerousModePermissionPrompt": true
+  "autoMode": {
+    "soft_deny": [
+      "$defaults",
+      "Bash(git push --force*) in RobertoRuedaQ/ia-settings — public repo with no branch protection, force-push would rewrite public history",
+      "Bash(kubectl delete*) — destructive subcommand of a frequently-used CLI (37× in shell history) with no cluster/namespace scoping evidence"
+    ],
+    "environment": [
+      "### Org-wide",
+      "**Organization**: None configured",
+      "**Cloud provider(s)**: None configured",
+      "**Repository visibility**: PUBLIC — github.com:RobertoRuedaQ/ia-settings.git (repo: RobertoRuedaQ/ia-settings)",
+      "**Internal sharing / snippet hosting**: None configured — treat public paste/gist services as outside the trust boundary",
+      "**Secrets management**: None configured",
+      "**Default / protected branches**: Default branch unknown (origin/HEAD unset); no protected branches or rulesets listed via gh — note a public repo with no branch protection means any push is directly published",
+      "**CI/CD deploy targets**: None configured",
+      "**Network posture**: None configured",
+      "**Source control**: The trusted repo (github.com:RobertoRuedaQ/ia-settings.git) and its remote(s) only — no additional orgs configured",
+      "**Trusted internal domains**: None configured",
+      "**Trusted cloud buckets**: None configured",
+      "**Key internal services**: None configured",
+      "**Internal package registry**: None configured",
+      "**Sensitive data locations & audiences**: any file or store holding personal data, confidential business data, credentials, regulated data, or similarly sensitive material; preserve exact handles when known and share only with audiences cleared at the [named+specifics] bar — note .gitignore flags .credentials.json, .env/.env*, and *.key as sensitive-looking patterns in this repo",
+      "**Data retention / declassification**: None configured",
+      "**Sensitive remote targets**: any namespace, host, or container whose name carries `prod` or `production` as a whole word or name segment (hyphen/underscore/dot-delimited — e.g. matches `prod-db`, not `producer`)",
+      "**Protected deployment namespaces / environments**: None configured — fall back to the Sensitive remote targets heuristic",
+      "**Protected IaC scopes**: IAM, RBAC, networking, quota, and node-pool resources; anything whose name or tag carries `prod` or `production` as a whole word or name segment",
+      "### User-specific",
+      "**Primary use of Claude Code**: software development (Ruby/Rails-heavy toolchain per shell history: rails, bundle, rbenv, gem, rake, ruby; also kubectl, docker, npm/yarn/nvm/deno for JS tooling)",
+      "**Trusted repo**: /Users/robertorueda/.claude (this repo, working directory), remote github.com:RobertoRuedaQ/ia-settings.git — PUBLIC: only this repo's own work should be committed/pushed here; content ported or first read from outside this session's repo is not its own work",
+      "**Org-specific CLIs**: None configured",
+      "routine under /Users/robertorueda/.claude/ prefix: read-only and local-edit operations on this repo's own tracked files"
+    ]
+  }
 }
