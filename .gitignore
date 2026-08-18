@@ -7,6 +7,8 @@
 # --- allow-listed config worth backing up ---
 !/.gitignore
 !/CLAUDE.md
+!/README.md
+!/README.compact.md
 !/agents/
 !/skills/
 !/hooks/
